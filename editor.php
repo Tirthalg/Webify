@@ -1,11 +1,9 @@
 <?php
-//include 'editor.html';
-$html = file_get_contents('editor.html');
+$html = file_get_contents('index.html');
 
-//search for html files in demo and my-pages folders
 $htmlFiles = glob('{my-pages/*.html,demo/*\/*.html, demo/*.html}',  GLOB_BRACE);
 foreach ($htmlFiles as $file) { 
-   if (in_array($file, array('new-page-blank-template.html', 'editor.html'))) continue;//skip template files
+   if (in_array($file, array('new-page-blank-template.html', 'index.html'))) continue;//skip template files
    $pathInfo = pathinfo($file);
    $filename = $pathInfo['filename'];
    $folder = preg_replace('@/.+?$@', '', $pathInfo['dirname']);
@@ -20,7 +18,6 @@ foreach ($htmlFiles as $file) {
 } 
 
 
-//replace files list from html with the dynamic list from demo folder
 $html = str_replace('(pages)', "([$files])", $html);
 
 echo $html;
